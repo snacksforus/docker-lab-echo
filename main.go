@@ -27,11 +27,12 @@ func echoHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", echoHandler)
 
-	port := ":8080"
-	log.Printf("Server starting on http://localhost%s", port)
-	log.Printf("Try: http://localhost%s/?name=John&age=30", port)
+	port := "8080"
+	log.Printf("Server starting on http://localhost:%s", port)
+	log.Printf("Try: http://localhost:%s/?name=John&age=30", port)
 
-	if err := http.ListenAndServe(port, nil); err != nil {
+	addr := fmt.Sprintf(":%s", port)
+	if err := http.ListenAndServe(addr, nil); err != nil {
 		log.Fatal(err)
 	}
 }
