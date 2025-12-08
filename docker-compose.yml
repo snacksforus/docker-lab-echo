@@ -1,0 +1,6 @@
+services:
+  echo-server:
+    build: .
+    ports:
+      - "8080:8080"
+    container_name: echo-server
