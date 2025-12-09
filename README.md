@@ -1,40 +1,52 @@
-# Echo Server
+# Docker Lab Echo
 
-A simple Go web server that echoes back query parameters.
+This Docker lab demonstrates building a Docker image, and running it with Docker build
+and Docker compose.  A simple Go web server that echoes back query parameters is used
+for the demonstration.  
 
-## Running the Server
+## Running the Echo Server
 
-### Option 1: Run with Go
+The echo server can be run using `docker run` or `docker compose`.  For this lab, the 
+advantage to using `docker compose` is that it encodes all the options to run the server.
 
-```bash
-go run main.go
-```
+### Option 1: Run with Docker
 
-### Option 2: Run with Docker
-
-Build the Docker image:
+Build the Docker image, and tag it as 'echo-server':
 ```bash
 docker build -t echo-server .
 ```
 
-Run the container:
+Run the container, publish the container's port 8080 to the host's port 8080, and 
+detach from the container:
 ```bash
-docker run -p 8080:8080 echo-server
+docker run -d -p 8080:8080 echo-server
 ```
 
-### Option 3: Run with Docker Compose
-
-Start the service:
+To stop the container use `docker ps` to find the ID or name for the running container,
+and use `docker stop` to stop the container.  For example:
 ```bash
-docker-compose up
+% docker ps
+CONTAINER ID   IMAGE         COMMAND           CREATED         STATUS         PORTS                                         NAMES
+428e9ccd9802   echo-server   "./echo-server"   3 seconds ago   Up 2 seconds   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp   modest_visvesvaraya
+% docker stop modest_visvesvaraya
 ```
 
-Stop the service:
+### Option 2: Run with Docker Compose
+
+Build the image:
 ```bash
-docker-compose down
+docker compose build
 ```
 
-The server will start on `http://localhost:8080`
+Start the server:
+```bash
+docker compose up
+```
+
+Stop the server:
+```bash
+docker compose down
+```
 
 ## Usage
 
